@@ -84,7 +84,7 @@ if __name__ == '__main__':
         except yaml.YAMLError as exc:
             assert False, "default.yaml error: {}".format(exc)
 
-    print(params)
+    # print(params)
     # Load algorithm and env base configs
     env_config = _get_config(params, "--env-config", "envs")
     alg_config = _get_config(params, "--config", "algs")
