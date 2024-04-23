@@ -84,10 +84,11 @@ if __name__ == '__main__':
         except yaml.YAMLError as exc:
             assert False, "default.yaml error: {}".format(exc)
 
+    print(params)
     # Load algorithm and env base configs
     env_config = _get_config(params, "--env-config", "envs")
     alg_config = _get_config(params, "--config", "algs")
-    print(env_config)
+    
     # config_dict = {**config_dict, **env_config, **alg_config}
     config_dict = recursive_dict_update(config_dict, env_config)
     config_dict = recursive_dict_update(config_dict, alg_config)
