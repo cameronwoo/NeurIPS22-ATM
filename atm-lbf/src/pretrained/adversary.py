@@ -23,15 +23,15 @@ class PretrainedAdversary(gym.Wrapper):
         self.last_adv_obs = None
 
 
-    # def reset(self, *args, **kwargs):
-    #     obs = super().reset(*args, **kwargs)
-    #     self.last_adv_obs = obs[0]
-    #     return obs[1:]
-
     def reset(self, *args, **kwargs):
         obs = super().reset(*args, **kwargs)
-        self.last_adv_obs = obs
-        return obs
+        self.last_adv_obs = obs[0]
+        return obs[1:]
+
+    # def reset(self, *args, **kwargs):
+    #     obs = super().reset(*args, **kwargs)
+    #     self.last_adv_obs = obs
+    #     return obs
 
     def step(self, action):
         adv_action = self.adv.step(self.last_adv_obs)
