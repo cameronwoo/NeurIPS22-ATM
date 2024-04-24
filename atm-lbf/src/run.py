@@ -30,7 +30,7 @@ def run(_run, _config, _log):
     _log.info("Experiment Parameters:")
     experiment_params = pprint.pformat(_config, indent=4, width=1)
     _log.info("\n\n" + experiment_params + "\n")
-
+    print('断点3 run')
     # configure tensorboard logger
     # unique_token = "{}__{}".format(args.name, datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
 
@@ -39,7 +39,7 @@ def run(_run, _config, _log):
     except:
         map_name = _config["env_args"]["key"]   
     unique_token = f"{_config['name']}_seed{_config['seed']}_{map_name}_{datetime.datetime.now()}"
-
+    print('断点4 run')
     args.unique_token = unique_token
     if args.use_tensorboard:
         tb_logs_direc = os.path.join(
@@ -47,10 +47,10 @@ def run(_run, _config, _log):
         )
         tb_exp_direc = os.path.join(tb_logs_direc, "{}").format(unique_token)
         logger.setup_tb(tb_exp_direc)
-
+    print('断点5 run')
     # sacred is on by default
     logger.setup_sacred(_run)
-
+    print('断点6 run')
     # Run and train
     run_sequential(args=args, logger=logger)
 
