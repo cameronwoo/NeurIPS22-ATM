@@ -8,7 +8,7 @@ from types import SimpleNamespace as SN
 from utils.logging import Logger
 from utils.timehelper import time_left, time_str
 from os.path import dirname, abspath
-
+from runners.episode_runner import EpisodeRunner
 from learners import REGISTRY as le_REGISTRY
 from runners import REGISTRY as r_REGISTRY
 from controllers import REGISTRY as mac_REGISTRY
@@ -84,7 +84,8 @@ def evaluate_sequential(args, runner):
 def run_sequential(args, logger):
     print('断点 runseq1')
     # Init runner so we can get env info
-    runner = r_REGISTRY[args.runner](args=args, logger=logger)
+    # runner = r_REGISTRY[args.runner](args=args, logger=logger)
+    runner = EpisodeRunner(args=args, logger=logger)
     print('断点 runseq2')
     # Set up schemes and groups here
     env_info = runner.get_env_info()
