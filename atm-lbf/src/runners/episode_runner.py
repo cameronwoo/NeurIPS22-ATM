@@ -22,22 +22,27 @@ class EpisodeRunner:
         self.test_returns = []
         self.train_stats = {}
         self.test_stats = {}
-
+        print('episodeRunner 0')
         # Log the first run
         self.log_train_stats_t = -1000000
+        print('episodeRunner 0.1')
 
     def setup(self, scheme, groups, preprocess, mac):
+        print('episodeRunner 1')
         self.new_batch = partial(EpisodeBatch, scheme, groups, self.batch_size, self.episode_limit + 1,
                                  preprocess=preprocess, device=self.args.device)
         self.mac = mac
 
     def get_env_info(self):
+        print('episodeRunner 2')
         return self.env.get_env_info()
 
     def save_replay(self):
+        print('episodeRunner 3')
         self.env.save_replay()
 
     def close_env(self):
+        print('episodeRunner 4')
         self.env.close()
 
     def reset(self):
@@ -46,6 +51,7 @@ class EpisodeRunner:
         self.t = 0
 
     def run(self, test_mode=False):
+        print('episodeRunner 5')
         self.reset()
 
         terminated = False
@@ -113,6 +119,7 @@ class EpisodeRunner:
         return self.batch
 
     def _log(self, returns, stats, prefix):
+        print('episodeRunner 6')
         self.logger.log_stat(prefix + "return_mean", np.mean(returns), self.t_env)
         self.logger.log_stat(prefix + "return_std", np.std(returns), self.t_env)
         returns.clear()
