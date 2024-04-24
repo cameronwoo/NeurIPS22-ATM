@@ -53,7 +53,7 @@ def run(_run, _config, _log):
     print('断点6 run')
     # Run and train
     run_sequential(args=args, logger=logger)
-
+    print('断点7 run')
     # Clean up after finishing
     print("Exiting Main")
 
@@ -63,7 +63,7 @@ def run(_run, _config, _log):
             print("Thread {} is alive! Is daemon: {}".format(t.name, t.daemon))
             t.join(timeout=1)
             print("Thread joined")
-
+    print('断点8 run')
     print("Exiting script")
 
     # Making sure framework really exits
