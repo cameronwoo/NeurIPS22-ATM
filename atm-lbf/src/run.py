@@ -84,8 +84,8 @@ def evaluate_sequential(args, runner):
 def run_sequential(args, logger):
     print('断点 runseq1')
     # Init runner so we can get env info
-    # runner = r_REGISTRY[args.runner](args=args, logger=logger)
-    runner = EpisodeRunner(args, logger)
+    runner = r_REGISTRY[args.runner](args=args, logger=logger)
+    # runner = EpisodeRunner(args, logger)
     print('断点 runseq2')
     # Set up schemes and groups here
     env_info = runner.get_env_info()
