@@ -24,14 +24,17 @@ if sys.platform == "linux":
 
 
 class TimeLimit(GymTimeLimit):
-    # def __init__(self, env, max_episode_steps=None):
-    def __init__(self, env, max_episode_steps):
+    def __init__(self, env, max_episode_steps=None):
+        print("timelimit1")
         super().__init__(env)
+        print("timelimit2")
         if max_episode_steps is None and self.env.spec is not None:
             max_episode_steps = env.spec.max_episode_steps
         # if self.env.spec is not None:
         #     self.env.spec.max_episode_steps = max_episode_steps
+        print("timelimit3")
         self._max_episode_steps = max_episode_steps
+        print("timelimit4")
         self._elapsed_steps = None
 
     def step(self, action):
@@ -80,7 +83,7 @@ class _GymmaWrapper(MultiAgentEnv):
     def __init__(self, key, time_limit, pretrained_wrapper, **kwargs):
         print("GymmaWrapper0")
         self.episode_limit = time_limit
-        # print("GymmaWrapper1")
+        print("GymmaWrapper1")
         # print(f"{key}")
         # time_limit2 = 5
         # env_name = "lbforaging:Foraging-8x8-2p-3f-v1"
