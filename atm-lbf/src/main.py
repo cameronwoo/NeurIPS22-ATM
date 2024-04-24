@@ -149,7 +149,7 @@ if __name__ == '__main__':
         commandline_running = False
 
     # 在另一个线程或异步任务中调用 run_experiment 函数
-    run_experiment()
+    #run_experiment()
     # ex.run_commandline(params)
     # 检查命令行是否正在运行
     if commandline_running:
