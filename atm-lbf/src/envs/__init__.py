@@ -77,21 +77,24 @@ class FlattenObservation(ObservationWrapper):
 
 class _GymmaWrapper(MultiAgentEnv):
     def __init__(self, key, time_limit, pretrained_wrapper, **kwargs):
+        print("GymmaWrapper0")
         self.episode_limit = time_limit
+        print("GymmaWrapper1")
         self._env = TimeLimit(gym.make(f"{key}"), max_episode_steps=time_limit)
+        print("GymmaWrapper2")
         self._env = FlattenObservation(self._env)
-
+        print("GymmaWrapper3")
         if pretrained_wrapper:
             self._env = getattr(pretrained, pretrained_wrapper)(self._env)
-
+        print("GymmaWrapper4")
         self.n_agents = self._env.n_agents
         self._obs = None
-
+        print("GymmaWrapper5")
         self.longest_action_space = max(self._env.action_space, key=lambda x: x.n)
         self.longest_observation_space = max(
             self._env.observation_space, key=lambda x: x.shape
         )
-
+        print("GymmaWrapper6")
         self._seed = kwargs["seed"]
         self._env.seed(self._seed)
 
