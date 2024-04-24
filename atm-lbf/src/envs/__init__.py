@@ -193,6 +193,6 @@ class _GymmaWrapper(MultiAgentEnv):
     
 REGISTRY = {}
 REGISTRY["sc2"] = partial(env_fn, env=StarCraft2Env)
-REGISTRY["gymma"] = partial(env_fn, env=_GymmaWrapper)
+REGISTRY["gymma"] = partial( env_fn(env = _GymmaWrapper),env=_GymmaWrapper)
 
 
