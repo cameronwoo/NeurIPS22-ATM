@@ -17,10 +17,10 @@ from components.transforms import OneHot
 
 
 def run(_run, _config, _log):
-
+    print('断点1 run')
     # check args sanity
     _config = args_sanity_check(_config, _log)
-
+    print('断点2 run')
     args = SN(**_config)
     args.device = "cuda" if args.use_cuda else "cpu"
 
