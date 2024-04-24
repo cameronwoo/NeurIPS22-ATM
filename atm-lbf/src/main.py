@@ -117,6 +117,6 @@ if __name__ == '__main__':
     # ex.observers.append(MongoObserver(db_name="marlbench")) #url='172.31.5.187:27017'))
     ex.observers.append(FileStorageObserver.create(file_obs_path))
     # ex.observers.append(MongoObserver())
-
+    print('断点8')
     ex.run_commandline(params)
 
