@@ -7,6 +7,7 @@ import numpy as np
 class EpisodeRunner:
 
     def __init__(self, args, logger):
+        print("episode1")
         self.args = args
         self.logger = logger
         self.batch_size = self.args.batch_size_run
@@ -22,10 +23,10 @@ class EpisodeRunner:
         self.test_returns = []
         self.train_stats = {}
         self.test_stats = {}
-        print('episodeRunner 0')
+ 
         # Log the first run
         self.log_train_stats_t = -1000000
-        print('episodeRunner 0.1')
+
 
     def setup(self, scheme, groups, preprocess, mac):
         print('episodeRunner 1')
