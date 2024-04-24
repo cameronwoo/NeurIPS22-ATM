@@ -157,13 +157,13 @@ if __name__ == '__main__':
     # 启动线程
     experiment_thread.start()
 
-    while True:
-        if commandline_running:
-            print("Command line is running.")
-        else:
-            print("Command line is not running.")
-            break
-        # time.sleep(2)  # 每隔 1 秒钟检查一次
+    # while True:
+    #     if commandline_running:
+    #         print("Command line is running.")
+    #     else:
+    #         print("Command line is not running.")
+    #         break
+    #     # time.sleep(2)  # 每隔 1 秒钟检查一次
 
     # # 检测名为 "ex.run_commandline(params)" 的进程是否正在运行
     # process_name = "ex.run_commandline(params)"
