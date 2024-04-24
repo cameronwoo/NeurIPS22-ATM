@@ -17,7 +17,9 @@ class EpisodeRunner:
         assert self.batch_size == 1
         print("episode5")
         self.env = env_REGISTRY[self.args.env](**self.args.env_args)
+        print("episode6")
         self.episode_limit = self.env.episode_limit
+        print("episode7")
         self.t = 0
 
         self.t_env = 0
@@ -26,10 +28,10 @@ class EpisodeRunner:
         self.test_returns = []
         self.train_stats = {}
         self.test_stats = {}
- 
+        print("episode8")
         # Log the first run
         self.log_train_stats_t = -1000000
-
+        print("episode9")
 
     def setup(self, scheme, groups, preprocess, mac):
         print('episodeRunner 1')
