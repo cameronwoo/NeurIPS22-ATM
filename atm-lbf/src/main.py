@@ -14,6 +14,7 @@ import yaml
 import subprocess
 import time
 import psutil
+import threading
 os.environ['CUDA_VISIBLE_DEVICES'] = "0"
 
 from run import run
@@ -149,16 +150,20 @@ if __name__ == '__main__':
         commandline_running = False
 
     # 在另一个线程或异步任务中调用 run_experiment 函数
-    #run_experiment()
+    
+
+    # 创建一个新的线程来运行实验
+    experiment_thread = threading.Thread(target=run_experiment)
+
+    # 启动线程
+    experiment_thread.start()
+    # run_experiment()
     # ex.run_commandline(params)
     # 检查命令行是否正在运行
     if commandline_running:
         print("Command line is running.")
     else:
         print("Command line is not running.")
-
-
-
     
 
     # # 检测名为 "ex.run_commandline(params)" 的进程是否正在运行
