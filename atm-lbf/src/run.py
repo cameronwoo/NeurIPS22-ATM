@@ -82,16 +82,17 @@ def evaluate_sequential(args, runner):
 
 
 def run_sequential(args, logger):
-
+    print('断点 runseq1')
     # Init runner so we can get env info
     runner = r_REGISTRY[args.runner](args=args, logger=logger)
-
+    print('断点 runseq2')
     # Set up schemes and groups here
     env_info = runner.get_env_info()
+    print('断点 runseq3')
     args.n_agents = env_info["n_agents"]
     args.n_actions = env_info["n_actions"]
     args.state_shape = env_info["state_shape"]
-
+    print('断点 runseq4')
     # Default/Base scheme
     scheme = {
         "state": {"vshape": env_info["state_shape"]},
@@ -107,7 +108,7 @@ def run_sequential(args, logger):
     }
     groups = {"agents": args.n_agents}
     preprocess = {"actions": ("actions_onehot", [OneHot(out_dim=args.n_actions)])}
-
+    print('断点 runseq5')
     buffer = ReplayBuffer(
         scheme,
         groups,
@@ -116,13 +117,13 @@ def run_sequential(args, logger):
         preprocess=preprocess,
         device="cpu" if args.buffer_cpu_only else args.device,
     )
-
+    print('断点 runseq6')
     # Setup multiagent controller here
     mac = mac_REGISTRY[args.mac](buffer.scheme, groups, args)
-
+    print('断点 runseq7')
     # Give runner the scheme
     runner.setup(scheme=scheme, groups=groups, preprocess=preprocess, mac=mac)
-
+    print('断点 runseq8')
     # Learner
     learner = le_REGISTRY[args.learner](mac, buffer.scheme, logger, args)
 
@@ -155,11 +156,11 @@ def run_sequential(args, logger):
             timestep_to_load = min(timesteps, key=lambda x: abs(x - args.load_step))
 
         model_path = os.path.join(args.checkpoint_path, str(timestep_to_load))
-
+        print('断点 runseq9')
         logger.console_logger.info("Loading model from {}".format(model_path))
         learner.load_models(model_path)
         runner.t_env = timestep_to_load
-
+        print('断点 runseq10')
         if args.evaluate or args.save_replay:
             runner.log_train_stats_t = runner.t_env
             evaluate_sequential(args, runner)
