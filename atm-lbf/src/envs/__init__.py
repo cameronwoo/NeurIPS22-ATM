@@ -81,8 +81,12 @@ class _GymmaWrapper(MultiAgentEnv):
         self.episode_limit = time_limit
         print("GymmaWrapper1")
         print(f"{key}")
-        print(time_limit)
-        self._env = TimeLimit(gym.make(f"{key}"), max_episode_steps=time_limit)
+        time_limit2 = 5
+
+        env_name = "lbforaging:Foraging-8x8-2p-3f-v1"
+        env1 = gym.make(env_name)
+
+        self._env = TimeLimit(env1, max_episode_steps=time_limit2)
         print("GymmaWrapper2")
         self._env = FlattenObservation(self._env)
         print("GymmaWrapper3")
