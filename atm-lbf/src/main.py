@@ -11,7 +11,9 @@ import sys
 import torch as th
 from utils.logging import get_logger
 import yaml
-
+import subprocess
+import time
+import psutil
 os.environ['CUDA_VISIBLE_DEVICES'] = "0"
 
 from run import run
@@ -72,6 +74,21 @@ def config_copy(config):
     else:
         return deepcopy(config)
 
+def is_process_running(process_name):
+    # 遍历所有正在运行的进程
+    for proc in psutil.process_iter():
+        try:
+            # 获取进程的名称
+            process = psutil.Process(proc.pid)
+            name = process.name()
+            # 如果找到与目标进程名称匹配的进程，则返回 True
+            if name == process_name:
+                return True
+        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+            pass
+    # 如果未找到匹配的进程，则返回 False
+    return False
+
 
 if __name__ == '__main__':
     print('断点1')
@@ -119,5 +136,17 @@ if __name__ == '__main__':
     # ex.observers.append(MongoObserver())
     print('断点8')
     ex.run_commandline(params)
+    # 检测名为 "ex.run_commandline(params)" 的进程是否正在运行
+    process_name = "ex.run_commandline(params)"
+    is_running = is_process_running(process_name)
+    if is_running:
+        print(f"Process {process_name} is running.")
+    else:
+        print(f"Process {process_name} is not running.")
+        print("Command is running:", is_running)
     print('断点9')
+    
 
+    
+
+    
