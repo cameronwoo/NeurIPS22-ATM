@@ -74,7 +74,9 @@ def config_copy(config):
 
 
 if __name__ == '__main__':
+    print('断点1')
     params = deepcopy(sys.argv)
+    print('断点2')
     th.set_num_threads(1)
 
     # Get the defaults from default.yaml
@@ -83,7 +85,7 @@ if __name__ == '__main__':
             config_dict = yaml.safe_load(f)
         except yaml.YAMLError as exc:
             assert False, "default.yaml error: {}".format(exc)
-
+    print('断点3')
     # print(params)
     # Load algorithm and env base configs
     env_config = _get_config(params, "--env-config", "envs")
@@ -92,13 +94,13 @@ if __name__ == '__main__':
     # config_dict = {**config_dict, **env_config, **alg_config}
     config_dict = recursive_dict_update(config_dict, env_config)
     config_dict = recursive_dict_update(config_dict, alg_config)
-
+    print('断点4')
     try:
         map_name = config_dict["env_args"]["map_name"]
     except:
         map_name = config_dict["env_args"]["key"]    
     
-    
+    print('断点5')
     # now add all the config to sacred
     ex.add_config(config_dict)
     
@@ -107,11 +109,11 @@ if __name__ == '__main__':
             map_name = param.split("=")[1]
         elif param.startswith("env_args.key"):
             map_name = param.split("=")[1]
-
+    print('断点6')
     # Save to disk by default for sacred
     logger.info("Saving to FileStorageObserver in results/sacred.")
     file_obs_path = os.path.join(results_path, f"sacred/{map_name}/{config_dict['name']}")
-
+    print('断点7')
     # ex.observers.append(MongoObserver(db_name="marlbench")) #url='172.31.5.187:27017'))
     ex.observers.append(FileStorageObserver.create(file_obs_path))
     # ex.observers.append(MongoObserver())
