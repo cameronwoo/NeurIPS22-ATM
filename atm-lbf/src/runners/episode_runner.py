@@ -9,10 +9,13 @@ class EpisodeRunner:
     def __init__(self, args, logger):
         print("episode1")
         self.args = args
+        print("episode2")
         self.logger = logger
+        print("episode3")
         self.batch_size = self.args.batch_size_run
+        print("episode4")
         assert self.batch_size == 1
-
+        print("episode5")
         self.env = env_REGISTRY[self.args.env](**self.args.env_args)
         self.episode_limit = self.env.episode_limit
         self.t = 0
