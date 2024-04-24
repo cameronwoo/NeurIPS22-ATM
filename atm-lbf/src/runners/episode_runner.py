@@ -16,7 +16,7 @@ class EpisodeRunner:
         print("episode4")
         assert self.batch_size == 1
         print("episode5")
-        print(self.args.env)
+        print(env_REGISTRY[self.args.env])
         self.env = env_REGISTRY[self.args.env](**self.args.env_args)
         print("episode6")
         self.episode_limit = self.env.episode_limit
