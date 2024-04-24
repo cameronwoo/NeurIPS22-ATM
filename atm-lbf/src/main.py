@@ -119,4 +119,5 @@ if __name__ == '__main__':
     # ex.observers.append(MongoObserver())
     print('断点8')
     ex.run_commandline(params)
+    print('断点9')
 
