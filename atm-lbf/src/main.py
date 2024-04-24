@@ -135,15 +135,41 @@ if __name__ == '__main__':
     ex.observers.append(FileStorageObserver.create(file_obs_path))
     # ex.observers.append(MongoObserver())
     print('断点8')
-    ex.run_commandline(params)
-    # 检测名为 "ex.run_commandline(params)" 的进程是否正在运行
-    process_name = "ex.run_commandline(params)"
-    is_running = is_process_running(process_name)
-    if is_running:
-        print(f"Process {process_name} is running.")
+
+    # 设置一个标志来表示命令行是否正在运行
+    commandline_running = False
+
+    def run_experiment():
+        global commandline_running
+        # 标志为 True 表示命令行正在运行
+        commandline_running = True
+        # 运行实验命令行
+        ex.run_commandline(params)
+        # 命令行运行结束后，将标志设置为 False
+        commandline_running = False
+
+    # 在另一个线程或异步任务中调用 run_experiment 函数
+    run_experiment()
+    # ex.run_commandline(params)
+    # 检查命令行是否正在运行
+    if commandline_running:
+        print("Command line is running.")
     else:
-        print(f"Process {process_name} is not running.")
-        print("Command is running:", is_running)
+        print("Command line is not running.")
+
+
+
+    
+
+    # # 检测名为 "ex.run_commandline(params)" 的进程是否正在运行
+    # process_name = "ex.run_commandline(params)"
+    # is_running = is_process_running(process_name)
+    # if is_running:
+    #     print(f"Process {process_name} is running.")
+    # else:
+    #     print(f"Process {process_name} is not running.")
+    #     print("Command is running:", is_running)
+
     print('断点9')
     
 
