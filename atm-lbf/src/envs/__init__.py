@@ -14,8 +14,7 @@ def env_fn(env, **kwargs) -> MultiAgentEnv:
     return env(**kwargs)
 
 
-REGISTRY = {}
-REGISTRY["sc2"] = partial(env_fn, env=StarCraft2Env)
+
 
 if sys.platform == "linux":
     os.environ.setdefault(
@@ -191,6 +190,9 @@ class _GymmaWrapper(MultiAgentEnv):
 
     def get_stats(self):
         return {}
-
-
+    
+REGISTRY = {}
+REGISTRY["sc2"] = partial(env_fn, env=StarCraft2Env)
 REGISTRY["gymma"] = partial(env_fn, env=_GymmaWrapper)
+
+
